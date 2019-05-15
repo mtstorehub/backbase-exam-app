@@ -1,51 +1,60 @@
 <template lang="html">
 
   <section class="add-item">
+
+
     <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h3>Add Item</h3>
-            </div>
-            <div class="card-body">
-                <form v-on:submit.prevent="addItem">
-                    <div class="form-group">
-                        <label>Item Name:</label>
-                        <input type="text" class="form-control" v-model="newItem.name"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Item Price:</label>
-                        <input type="text" class="form-control" v-model="newItem.price"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Add Item"/>
-                    </div>
-                </form>
-            </div>
-        </div>
+      
+      <md-field>
+        <label>Type Question...</label>
+        <md-textarea v-model="newExamItem.ques"></md-textarea>
+      </md-field>
+
+      <div>
+        <md-list>
+          <md-list-item v-for="(item, index) in newExamItem.ans">
+            <md-radio v-model="radio" :value="item.text"/>
+            <span class="md-list-item-text">{{item.text}}</span>
+          </md-list-item>
+        </md-list>
+      </div>
+
+      <md-field>
+        <label></label>
+        <md-icon>add</md-icon>
+        <md-input placeholder="Add a solution" v-model="new_solution" @keyup.enter="addNewSolution()"></md-input>
+      </md-field>
+      <md-button class="md-raised primary-color pull-right" @click="addExam()">Save</md-button>
     </div>
-    <md-button class="md-raised md-primary">Primary</md-button>
+
   </section>
 
 </template>
 
 <script lang="js">
-import { database } from '../config/firebase'
-  export default  {
+  import { database } from '../config/firebase'
+  export default {
     name: 'add-item',
     firebase: {
-      items: database.ref('items')
+      items: database.ref('items'),
+      exams: database.ref('exams'),
     },
 
     props: [],
     mounted() {
-
     },
     data() {
       return {
         newItem: {
           name: '',
           price: ''
-        }
+        },
+        newExamItem: {
+          ques: '',
+          ans: [],
+        },
+        radio: '',
+        new_solution: ''
       }
     },
     methods: {
@@ -57,16 +66,51 @@ import { database } from '../config/firebase'
         this.newItem.name = ''
         this.newItem.price = ''
         this.$router.push('/index')
+      },
+
+      addExam() {
+        this.newExamItem.ans.map(item => {
+          if(item.text === this.radio) item.right = true
+        })
+        this.$firebaseRefs.exams.push({
+          ques: this.newExamItem.ques,
+          ans: this.newExamItem.ans
+        })
+        this.newExamItem.ques = ''
+        this.newExamItem.ans = []
+        this.$router.push('/index')
+      },
+
+      addNewSolution() {
+        if(!this.new_solution)
+          return;
+        let arr = this.newExamItem.ans;
+        arr.push({
+          text: this.new_solution,
+          right: false
+        })
+        this.radio = this.new_solution
+        this.new_solution = ''
       }
     },
     computed: {
-
     }
-}
+  }
 </script>
 
 <style scoped lang="scss">
   .add-item {
+    .primary-color {
+      background-color: #33b5e5 !important;
+      color: #fff !important;
+    }
 
+    md-radio {
+      display: flex;
+    }
+
+    .pull-right {
+      float: right;
+    }
   }
 </style>

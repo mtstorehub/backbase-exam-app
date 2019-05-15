@@ -2,52 +2,97 @@
   <div id="app">
     <div id="nav" class="page-container md-layout-column">
       <md-toolbar class="md-primary">
-      <md-button class="md-icon-button" @click="showNavigation = true">
-        <md-icon>menu</md-icon>
-      </md-button>
-      <span class="md-title">Backbase CXS Front-end</span>
+        <md-button class="md-icon-button" @click="showNavigation = true">
+          <md-icon>menu</md-icon>
+        </md-button>
+        <span class="md-title">Backbase CXS Frontend</span>
+      </md-toolbar>
 
-      <div class="md-toolbar-section-end">
-        <md-button @click="showSidepanel = true">Favorites</md-button>
-      </div>
-    </md-toolbar>
-    
+      <md-drawer :md-active.sync="showNavigation" md-swipeable>
+        <md-toolbar class="md-transparent" md-elevation="0">
+          <span class="md-title">Backbase Exam App</span>
+        </md-toolbar>
+
+        <md-list>
+          <router-link to="/add">
+            <md-list-item @click>
+              <md-icon>thumb_up</md-icon>
+              <span class="md-list-item-text">
+                Training
+              </span>
+            </md-list-item>
+          </router-link>
+
+          <router-link to="/index">
+            <md-list-item @click>
+              <md-icon>send</md-icon>
+              <span class="md-list-item-text">Contribute</span>
+            </md-list-item>
+          </router-link>
+
+        </md-list>
+      </md-drawer>
+      <md-content>
+        <router-view />
+      </md-content>
+
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/add">Add Item</router-link> |
       <router-link to="/index">All Item</router-link> | -->
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 0px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+  export default {
+    name: 'App',
+    data() {
+      return {
+        showNavigation: false,
+        showSidepanel: false
+      }
     }
   }
-}
-.page-container {
-    min-height: 300px;
-    overflow: hidden;
+</script>
+
+<style lang="scss">
+  @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  #nav {
+    padding: 0px;
+
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
+
+  .page-container {
     position: relative;
     border: 1px solid rgba(#000, .12);
   }
+
   .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
   }
 
+  .md-content {
+    padding: 16px;
+    height: -webkit-fill-available;
+    position: relative;
+    overflow: hidden;
+  }
 </style>

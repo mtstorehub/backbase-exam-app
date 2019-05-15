@@ -26,6 +26,7 @@
           </tr>
       </tbody>
     </table>
+    <md-button class="md-raised md-primary">+ New</md-button>
   </div>
   </section>
 

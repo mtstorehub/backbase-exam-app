@@ -4,15 +4,14 @@ import router from './router'
 import NProgress from 'nprogress';
 import VueFire from 'vuefire'
 import '../node_modules/nprogress/nprogress.css'
-import { MdButton, MdToolbar, MdIcon } from 'vue-material/dist/components'
+// import { MdButton, MdToolbar, MdIcon } from 'vue-material/dist/components'
+import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 
 Vue.use(VueFire)
 
-Vue.use(MdButton)
-Vue.use(MdToolbar)
-Vue.use(MdIcon)
+Vue.use(VueMaterial)
 
 Vue.config.productionTip = false
 
