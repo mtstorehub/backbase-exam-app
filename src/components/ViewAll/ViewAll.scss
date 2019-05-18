@@ -1,0 +1,14 @@
+.view-all {
+    .md-card {
+        width: 320px;
+        margin: 4px;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        height: 6em;
+        overflow: hidden;
+        .md-card-content *{
+            text-overflow: ellipsis;
+        }
+    }
+}

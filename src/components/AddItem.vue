@@ -7,12 +7,12 @@
       
       <md-field>
         <label>Type Question...</label>
-        <md-textarea v-model="newExamItem.ques"></md-textarea>
+        <md-textarea v-model="newExamItem.Question"></md-textarea>
       </md-field>
 
       <div>
         <md-list>
-          <md-list-item v-for="(item, index) in newExamItem.ans">
+          <md-list-item v-for="item in newExamItem.Answers" :key="item.text">
             <md-radio v-model="radio" :value="item.text"/>
             <span class="md-list-item-text">{{item.text}}</span>
           </md-list-item>
@@ -50,8 +50,8 @@
           price: ''
         },
         newExamItem: {
-          ques: '',
-          ans: [],
+          Question: '',
+          Answers: [],
         },
         radio: '',
         new_solution: ''
@@ -69,22 +69,22 @@
       },
 
       addExam() {
-        this.newExamItem.ans.map(item => {
+        this.newExamItem.Answers.map(item => {
           if(item.text === this.radio) item.right = true
         })
         this.$firebaseRefs.exams.push({
-          ques: this.newExamItem.ques,
-          ans: this.newExamItem.ans
+          Question: this.newExamItem.Question,
+          Answers: this.newExamItem.Answers
         })
-        this.newExamItem.ques = ''
-        this.newExamItem.ans = []
+        this.newExamItem.Question = ''
+        this.newExamItem.Answers = []
         this.$router.push('/index')
       },
 
       addNewSolution() {
         if(!this.new_solution)
           return;
-        let arr = this.newExamItem.ans;
+        let arr = this.newExamItem.Answers;
         arr.push({
           text: this.new_solution,
           right: false

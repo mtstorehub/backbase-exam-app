@@ -3,6 +3,11 @@
   <section class="list-item">
     <div>
     <h1>List Item</h1>
+    <div class="md-layout md-gutter md-alignment-center">
+      <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+        
+      </div>
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>

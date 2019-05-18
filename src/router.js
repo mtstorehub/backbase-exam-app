@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AddItem from './components/AddItem.vue'
 import EditItem from './components/EditItem.vue'
-import ListItem from './components/ListItem.vue'
+// import ListItem from './components/ListItem.vue'
 import HomeItem from './components/HomeItem.vue'
-
+import ViewAll from './components/ViewAll'
 Vue.use(Router)
 
 export default new Router({
@@ -25,9 +25,9 @@ export default new Router({
         component: EditItem
     },
     {
-        name: 'List',
+        name: 'ViewAll',
         path: '/index',
-        component: ListItem
+        component: ViewAll
     },
     {
       path: '/about',
