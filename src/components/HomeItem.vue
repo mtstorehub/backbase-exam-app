@@ -57,7 +57,7 @@
 
     <div class="text-xs-center" v-if="!itemrender">
       <v-progress-circular :rotate="90" :size="200" :width="15" :value="progressAmount" color="red accent-4" style="font-size: x-large;">
-        {{ progressAmount }}
+        {{ progressAmount }} %
       </v-progress-circular>
       <span class="md-display-1">Fetching Questions and Shuffling</span>
     </div>
