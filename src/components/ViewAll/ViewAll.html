@@ -4,14 +4,6 @@
     <md-input v-model="selectedQuestion" @keydown="filterQuestions"></md-input>
   </md-field>
 
-  <!-- <md-autocomplete v-model="selectedQuestion" :md-options="questions" :md-open-on-focus="false"
-    :md-fuzzy-search="false">
-    <label>Search Question...</label>
-    <template slot="md-autocomplete-item" slot-scope="{ item, term }">
-      <md-highlight-text :md-term="term">{{ item }}</md-highlight-text>
-    </template>
-  </md-autocomplete> -->
-
   <md-card v-for="item of filteredItems" :key="item['.key']">
     <md-tooltip style="width: min-content;">{{item.Question}}</md-tooltip>
     <md-card-content>
@@ -23,4 +15,8 @@
       </router-link>
     </md-card-actions>
   </md-card>
+
+  <div class="footer">
+  <md-button class="md-raised md-primary">+ New</md-button>
+</div>
 </section>
