@@ -11,7 +11,7 @@
               </span>
             <v-divider class="my-3"></v-divider>
             <div class="title mb-3">If you want to contribute, contact me!</div>
-              <v-btn class="mx-0" color="error" large href="mailto:myat.th@yomabank.com?subject=Contribution Request">Contact me</v-btn>
+              <v-btn class="mx-0" color="error" large href="mailto:myat.thu@yomabank.com?subject=Contribution Request">Contact me</v-btn>
           </v-flex>
         </v-layout>
       </v-container>

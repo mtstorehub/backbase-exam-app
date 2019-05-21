@@ -2,7 +2,8 @@
   <section class="home-item">
     <div class="md-layout md-gutter">
       <div class="md-layout-item text-right">
-        <v-btn color="red darken-4" dark @click="showCorrectItemsState = !showCorrectItemsState; showWrongItemsState = false">
+        <v-btn color="red darken-4" dark
+          @click="showCorrectItemsState = !showCorrectItemsState; showWrongItemsState = false">
           Correct
           <v-badge color="light-blue">
             <template v-slot:badge>
@@ -11,11 +12,12 @@
             <v-icon dark>check_circle</v-icon>
           </v-badge>
         </v-btn>
-        <v-btn color="red darken-4" dark @click="showWrongItemsState = !showWrongItemsState; showCorrectItemsState = false">
+        <v-btn color="red darken-4" dark
+          @click="showWrongItemsState = !showWrongItemsState; showCorrectItemsState = false">
           Wrong
           <v-badge color="purple">
             <template v-slot:badge>
-            <span>{{trackedWrongItems.length}}</span>
+              <span>{{trackedWrongItems.length}}</span>
             </template>
             <v-icon dark>block</v-icon>
           </v-badge>
@@ -25,13 +27,10 @@
 
     <div class="md-layout md-gutter" v-if="showCorrectItemsState && trackedCorrectItems.length > 0">
       <div class="md-layout-item">
-         <v-item-group>
+        <v-item-group>
           <v-subheader>Correct Items</v-subheader>
           <v-item v-for="n in trackedCorrectItems" :key="n">
-            <v-chip
-              slot-scope="{ active }"
-              :selected="active"
-              @click="page = n+1">
+            <v-chip slot-scope="{ active }" :selected="active" @click="page = n+1">
               # {{ n+1 }}
             </v-chip>
           </v-item>
@@ -41,13 +40,10 @@
 
     <div class="md-layout md-gutter" v-if="showWrongItemsState">
       <div class="md-layout-item">
-         <v-item-group>
+        <v-item-group>
           <v-subheader>Wrong Items</v-subheader>
           <v-item v-for="n in trackedWrongItems" :key="n">
-            <v-chip
-              slot-scope="{ active }"
-              :selected="active"
-              @click="page = n+1">
+            <v-chip slot-scope="{ active }" :selected="active" @click="page = n+1">
               # {{ n+1 }}
             </v-chip>
           </v-item>
@@ -55,14 +51,17 @@
       </div>
     </div>
 
-    <item 
-      v-bind:item="items[pointer]" 
-      v-bind:index="page" 
-      v-bind:render="childrender"
-      v-on:next-item="nextItem" 
+    <item v-bind:item="items[pointer]" v-bind:index="page" v-bind:render="itemrender" v-on:next-item="nextItem"
       v-on:set-tracked-item="markAsTrackedItem">
     </item>
-    
+
+    <div class="text-xs-center" v-if="!itemrender">
+      <v-progress-circular :rotate="90" :size="200" :width="15" :value="progressAmount" color="red accent-4" style="font-size: x-large;">
+        {{ progressAmount }}
+      </v-progress-circular>
+      <span class="md-display-1">Fetching Questions and Shuffling</span>
+    </div>
+
     <div class="footer">
       <v-pagination v-model="page" :length="items.length" :total-visible="8" color="red" circle></v-pagination>
     </div>
@@ -71,9 +70,9 @@
 </template>
 
 <script lang="js">
-import Item from '../components/Item'
-import { database } from '../config/firebase'
-  export default  {
+  import Item from '../components/Item'
+  import { database } from '../config/firebase'
+  export default {
     name: 'home-item',
     components: {
       Item
@@ -85,30 +84,34 @@ import { database } from '../config/firebase'
 
     props: [],
     beforeCreate() {
-     
+
     },
     created() {
       console.log('created');
       setTimeout(() => {
-        console.log('im waiting');
         this.shuffle(this.items)
-      }, 2000);
-      console.log('after time out');
-      
+      }, 4000);
+      setInterval(() => {
+        if (this.progressAmount === 100) {
+          this.itemrender = true
+        }
+        this.progressAmount += 25
+
+      }, 1000);
     },
     beforeMount() {
       console.log('before mount');
       this.items.map((item, index) => {
-      Object.assign(item, {index: index});
+        Object.assign(item, { index: index });
       });
     },
     mounted() {
-    console.log('mounted');
+      console.log('mounted');
     },
     beforeUpdate() {
     },
     updated() {
-       this.pointer = this.page - 1
+      this.pointer = this.page - 1
     },
 
     data() {
@@ -120,24 +123,25 @@ import { database } from '../config/firebase'
         page: 1,
         showCorrectItemsState: false,
         showWrongItemsState: false,
-        childrender: false
+        itemrender: false,
+        progressAmount: 0
       }
     },
 
     methods: {
       shuffle(array) {
-        array.sort(()=> Math.random() - 0.5)
+        array.sort(() => Math.random() - 0.5)
       },
       nextItem() {
-        this.page ++;
+        this.page++;
       },
       routeItem(n) {
         this.page = n + 1
-        
+
       },
       markAsTrackedItem(_trackedData) {
         Object.assign(this.items[this.pointer], _trackedData);
-        if (_trackedData.wrongAnswer === '')  {
+        if (_trackedData.wrongAnswer === '') {
           this.trackedCorrectItems.push(this.pointer)
         } else {
           this.trackedWrongItems.push(this.pointer)
@@ -146,22 +150,30 @@ import { database } from '../config/firebase'
     },
     computed: {
     }
-}
+  }
 </script>
 
 <style scoped lang="scss">
-.home-item {
-  .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    text-align: center;
-    z-index: 1;
-    .v-pagination {
-      color: black;
+  .home-item {
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      text-align: center;
+      z-index: 1;
+
+      .v-pagination {
+        color: black;
+      }
+    }
+    v-progress-circular {
+      margin: 1rem;
+    }
+    .md-display-1 {
+      margin: 2rem;
+      vertical-align: middle;
     }
   }
-}
 </style>
