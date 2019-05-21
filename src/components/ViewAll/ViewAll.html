@@ -1,11 +1,26 @@
-
 <section class="view-all">
-  <h1>view-all Component</h1>
-      <md-card v-for="item of items" :key="item['.key']">
-        <md-card-content>
-          {{item.Question}}
-        </md-card-content>
-      </md-card>
-  </div>
-</section>
+  <md-field md-clearable>
+    <label>Search Question...</label>
+    <md-input v-model="selectedQuestion" @keydown="filterQuestions"></md-input>
+  </md-field>
 
+  <!-- <md-autocomplete v-model="selectedQuestion" :md-options="questions" :md-open-on-focus="false"
+    :md-fuzzy-search="false">
+    <label>Search Question...</label>
+    <template slot="md-autocomplete-item" slot-scope="{ item, term }">
+      <md-highlight-text :md-term="term">{{ item }}</md-highlight-text>
+    </template>
+  </md-autocomplete> -->
+
+  <md-card v-for="item of filteredItems" :key="item['.key']">
+    <md-tooltip style="width: min-content;">{{item.Question}}</md-tooltip>
+    <md-card-content>
+      {{item.Question}}
+    </md-card-content>
+    <md-card-actions>
+      <router-link :to="{name: 'Add', params: {id: item['.key']} }">
+        <md-button class="md-dense">Edit</md-button>
+      </router-link>
+    </md-card-actions>
+  </md-card>
+</section>

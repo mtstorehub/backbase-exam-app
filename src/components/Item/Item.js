@@ -9,14 +9,17 @@ export default {
     return {
       answer: '',
       buttonText: 'Submit',
-      beforeSubmit: true
+      beforeSubmit: true,
     }
   },
   computed: {
 
   },
   mounted () {
-
+    
+  },
+  updated() {
+    
   },
   methods: {
     checkSolution() {
@@ -31,10 +34,13 @@ export default {
       this.buttonText = 'Next';
       let rightAnswer = this.item.Answers.find(answer => answer.right).text;
       let chooseAnswer = this.answer;
-      if(rightAnswer === chooseAnswer)
-        console.log("right");
-      else console.log("wrong");
+      if(rightAnswer === chooseAnswer){
+        this.$emit('set-tracked-item',{isDone: true, wrongAnswer: ''})
+      } else {
+        this.$emit('set-tracked-item', {isDone: true, wrongAnswer: chooseAnswer})
+      }
       
-    }
+    },
+
   }
 }

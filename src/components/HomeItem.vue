@@ -1,9 +1,71 @@
 <template lang="html">
   <section class="home-item">
-    <item v-bind:item="items[pointer]" v-bind:index="page" v-on:next-item="nextItem"></item>
+    <div class="md-layout md-gutter">
+      <div class="md-layout-item text-right">
+        <v-btn color="red darken-4" dark @click="showCorrectItemsState = !showCorrectItemsState; showWrongItemsState = false">
+          Correct
+          <v-badge color="light-blue">
+            <template v-slot:badge>
+              <span>{{trackedCorrectItems.length}}</span>
+            </template>
+            <v-icon dark>check_circle</v-icon>
+          </v-badge>
+        </v-btn>
+        <v-btn color="red darken-4" dark @click="showWrongItemsState = !showWrongItemsState; showCorrectItemsState = false">
+          Wrong
+          <v-badge color="purple">
+            <template v-slot:badge>
+            <span>{{trackedWrongItems.length}}</span>
+            </template>
+            <v-icon dark>block</v-icon>
+          </v-badge>
+        </v-btn>
+      </div>
+    </div>
+
+    <div class="md-layout md-gutter" v-if="showCorrectItemsState">
+      <div class="md-layout-item">
+         <v-item-group>
+          <v-subheader>Correct Items</v-subheader>
+          <v-item v-for="n in trackedCorrectItems" :key="n">
+            <v-chip
+              slot-scope="{ active }"
+              :selected="active"
+              @click="page = n+1">
+              # {{ n+1 }}
+            </v-chip>
+          </v-item>
+        </v-item-group>
+      </div>
+    </div>
+
+    <div class="md-layout md-gutter" v-if="showWrongItemsState">
+      <div class="md-layout-item">
+         <v-item-group>
+          <v-subheader>Wrong Items</v-subheader>
+          <v-item v-for="n in trackedWrongItems" :key="n">
+            <v-chip
+              slot-scope="{ active }"
+              :selected="active"
+              @click="page = n+1">
+              # {{ n+1 }}
+            </v-chip>
+          </v-item>
+        </v-item-group>
+      </div>
+    </div>
+
+    <item 
+      v-bind:item="items[pointer]" 
+      v-bind:index="page" 
+      v-on:next-item="nextItem" 
+      v-on:set-tracked-item="markAsTrackedItem">
+    </item>
+    
     <div class="footer">
       <v-pagination v-model="page" :length="items.length" :total-visible="10" color="red" circle></v-pagination>
     </div>
+
   </section>
 </template>
 
@@ -39,7 +101,6 @@ import { database } from '../config/firebase'
     
     },
     beforeUpdate() {
-     
     },
     updated() {
        this.pointer = this.page - 1
@@ -48,15 +109,31 @@ import { database } from '../config/firebase'
     data() {
       return {
         items: [],
+        trackedCorrectItems: [],
+        trackedWrongItems: [],
         pointer: 0,
-        page: 1
+        page: 1,
+        showCorrectItemsState: false,
+        showWrongItemsState: false
       }
     },
 
     methods: {
       nextItem() {
         this.page ++;
-      }
+      },
+      routeItem(n) {
+        this.page = n + 1
+        
+      },
+      markAsTrackedItem(_trackedData) {
+        Object.assign(this.items[this.pointer], _trackedData);
+        if (_trackedData.wrongAnswer === '')  {
+          this.trackedCorrectItems.push(this.pointer)
+        } else {
+          this.trackedWrongItems.push(this.pointer)
+        }
+      },
     },
     computed: {
     }
@@ -66,12 +143,16 @@ import { database } from '../config/firebase'
 <style scoped lang="scss">
 .home-item {
   .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   color: white;
-   text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 1;
+    .v-pagination {
+      color: black;
+    }
   }
 }
 </style>

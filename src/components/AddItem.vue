@@ -1,8 +1,6 @@
 <template lang="html">
 
   <section class="add-item">
-
-
     <div class="container">
       
       <md-field>
@@ -24,7 +22,7 @@
         <md-icon>add</md-icon>
         <md-input placeholder="Add a solution" v-model="new_solution" @keyup.enter="addNewSolution()"></md-input>
       </md-field>
-      <md-button class="md-raised primary-color pull-right" @click="addExam()">Save</md-button>
+      <md-button class="md-raised primary-color pull-right" @click="addExam()" id='saveBtn'>Save</md-button>
     </div>
 
   </section>
@@ -36,42 +34,48 @@
   export default {
     name: 'add-item',
     firebase: {
-      items: database.ref('items'),
       exams: database.ref('exams'),
+      examObject: {
+        source: database.ref('exams'),
+        asObject: true
+      }
     },
 
     props: [],
     mounted() {
+      console.log('mounted add item');
+      if(this.$route.params.id) {
+        let requestedExamItem = this.examObject[this.$route.params.id]
+        this.newExamItem = requestedExamItem
+        this.radio = requestedExamItem.Answers.find(item => item.right).text
+        document.getElementById('saveBtn').textContent = 'Update'
+      }
     },
     data() {
       return {
-        newItem: {
-          name: '',
-          price: ''
-        },
         newExamItem: {
           Question: '',
           Answers: [],
         },
         radio: '',
-        new_solution: ''
+        new_solution: '',
       }
     },
     methods: {
-      addItem() {
-        this.$firebaseRefs.items.push({
-          name: this.newItem.name,
-          price: this.newItem.price
-        })
-        this.newItem.name = ''
-        this.newItem.price = ''
-        this.$router.push('/index')
-      },
-
+      // post to firebase
       addExam() {
+        // assign right answer to true
         this.newExamItem.Answers.map(item => {
-          if(item.text === this.radio) item.right = true
+          item.right = (item.text === this.radio) ? true : false
         })
+        // update firebase data
+        if(this.$route.params.id){
+          console.log('updating...', this.$route.params.id);
+          this.$firebaseRefs.exams.child(this.$route.params.id).set(this.newExamItem)
+          this.$router.push('/index')
+          return;
+        }
+        // insert firebase data
         this.$firebaseRefs.exams.push({
           Question: this.newExamItem.Question,
           Answers: this.newExamItem.Answers
@@ -80,7 +84,12 @@
         this.newExamItem.Answers = []
         this.$router.push('/index')
       },
-
+      
+      updateExamItem() {
+        this.$firebaseRefs.exams.child(this.$route.params.id).set(this.newExamItem)
+        this.$router.push('/index')
+      },
+      // local ui update
       addNewSolution() {
         if(!this.new_solution)
           return;
@@ -99,18 +108,18 @@
 </script>
 
 <style scoped lang="scss">
-  .add-item {
-    .primary-color {
-      background-color: #33b5e5 !important;
-      color: #fff !important;
-    }
-
-    md-radio {
-      display: flex;
-    }
-
-    .pull-right {
-      float: right;
-    }
+.add-item {
+  .primary-color {
+    background-color: #33b5e5 !important;
+    color: #fff !important;
   }
+
+  md-radio {
+    display: flex;
+  }
+
+  .pull-right {
+    float: right;
+  }
+}
 </style>

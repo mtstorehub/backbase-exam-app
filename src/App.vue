@@ -5,7 +5,7 @@
         <md-button class="md-icon-button" @click="showNavigation = true">
           <md-icon>menu</md-icon>
         </md-button>
-        <span class="md-title">Backbase CXS Frontend</span>
+        <span class="md-title">Exam</span>
         <div class="md-toolbar-section-end">
           <router-link to="/">
             <md-button>Training</md-button>
@@ -114,5 +114,9 @@ $primary-color: #d50000;
   height: -webkit-fill-available;
   position: relative;
   overflow: hidden;
+}
+
+router-link{
+  text-decoration: none;
 }
 </style>

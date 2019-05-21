@@ -1,14 +1,26 @@
 .view-all {
+    @mixin overflow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .md-card {
         width: 320px;
         margin: 4px;
         display: inline-block;
         vertical-align: top;
         text-align: left;
-        height: 6em;
         overflow: hidden;
-        .md-card-content *{
-            text-overflow: ellipsis;
+
+        .md-card-content {
+            @include overflow;
+            height: 3em;
         }
+
+    }
+
+    md-highlight-text {
+        @include overflow;
     }
 }
