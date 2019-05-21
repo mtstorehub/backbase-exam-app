@@ -5,15 +5,7 @@
         <md-button class="md-icon-button" @click="showNavigation = true">
           <md-icon>menu</md-icon>
         </md-button>
-        <span class="md-title">Exam</span>
-        <div class="md-toolbar-section-end">
-          <router-link to="/">
-            <md-button>Training</md-button>
-          </router-link>
-          <router-link to="/index">
-           <md-button>Contribute</md-button>
-          </router-link>
-        </div>
+        <span class="md-title">Backbase CXS Frontend</span>
       </md-toolbar>
 
       <md-drawer :md-active.sync="showNavigation" md-swipeable>
@@ -22,16 +14,16 @@
         </md-toolbar>
 
         <md-list>
-          <router-link to="/add">
+          <router-link to="/">
             <md-list-item @click="showNavigation = false">
-              <md-icon>thumb_up</md-icon>
+              <md-icon>pool</md-icon>
               <span class="md-list-item-text">Training</span>
             </md-list-item>
           </router-link>
 
-          <router-link to="/index">
+          <router-link to="/about">
             <md-list-item @click="showNavigation = false">
-              <md-icon>send</md-icon>
+              <md-icon>school</md-icon>
               <span class="md-list-item-text">Contribute</span>
             </md-list-item>
           </router-link>

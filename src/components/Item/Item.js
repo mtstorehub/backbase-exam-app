@@ -3,7 +3,8 @@ export default {
   components: {},
   props: {
     item: Object,
-    index: Number
+    index: Number,
+    render: Boolean
   },
   data () {
     return {
@@ -16,7 +17,6 @@ export default {
 
   },
   mounted () {
-    
   },
   updated() {
     

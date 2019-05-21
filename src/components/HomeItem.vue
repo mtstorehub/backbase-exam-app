@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="md-layout md-gutter" v-if="showCorrectItemsState">
+    <div class="md-layout md-gutter" v-if="showCorrectItemsState && trackedCorrectItems.length > 0">
       <div class="md-layout-item">
          <v-item-group>
           <v-subheader>Correct Items</v-subheader>
@@ -58,12 +58,13 @@
     <item 
       v-bind:item="items[pointer]" 
       v-bind:index="page" 
+      v-bind:render="childrender"
       v-on:next-item="nextItem" 
       v-on:set-tracked-item="markAsTrackedItem">
     </item>
     
     <div class="footer">
-      <v-pagination v-model="page" :length="items.length" :total-visible="10" color="red" circle></v-pagination>
+      <v-pagination v-model="page" :length="items.length" :total-visible="8" color="red" circle></v-pagination>
     </div>
 
   </section>
@@ -88,6 +89,11 @@ import { database } from '../config/firebase'
     },
     created() {
       console.log('created');
+      setTimeout(() => {
+        console.log('im waiting');
+        this.shuffle(this.items)
+      }, 2000);
+      console.log('after time out');
       
     },
     beforeMount() {
@@ -98,7 +104,6 @@ import { database } from '../config/firebase'
     },
     mounted() {
     console.log('mounted');
-    
     },
     beforeUpdate() {
     },
@@ -114,11 +119,15 @@ import { database } from '../config/firebase'
         pointer: 0,
         page: 1,
         showCorrectItemsState: false,
-        showWrongItemsState: false
+        showWrongItemsState: false,
+        childrender: false
       }
     },
 
     methods: {
+      shuffle(array) {
+        array.sort(()=> Math.random() - 0.5)
+      },
       nextItem() {
         this.page ++;
       },
