@@ -68,7 +68,6 @@ $primary-color: #d50000;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  overflow-y: scroll;
 }
 
 #nav {
@@ -106,7 +105,7 @@ $primary-color: #d50000;
   padding: 16px;
   height: -webkit-fill-available;
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 router-link{

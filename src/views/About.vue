@@ -1,4 +1,4 @@
-<template>
+<template style="overflow:scroll">
   <div class="about">
     <v-jumbotron>
       <v-container fill-height>
