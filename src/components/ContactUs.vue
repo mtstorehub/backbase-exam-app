@@ -1,5 +1,7 @@
-<template style="overflow:scroll">
-  <div class="about">
+<template lang="html">
+
+  <section class="contact-us">
+   <div class="about">
     <v-jumbotron>
       <v-container fill-height>
         <v-layout align-center>
@@ -22,4 +24,13 @@
       <img src="../assets/ss2.png" alt="">
     </div>
   </div>
+  </section>
+
 </template>
+
+<script lang="js">
+  export default  {
+    name: 'contact-us',
+   
+}
+</script>

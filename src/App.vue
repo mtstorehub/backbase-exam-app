@@ -21,7 +21,7 @@
             </md-list-item>
           </router-link>
 
-          <router-link to="/about">
+          <router-link to="/contact_us">
             <md-list-item @click="showNavigation = false">
               <md-icon>school</md-icon>
               <span class="md-list-item-text">Contribute</span>

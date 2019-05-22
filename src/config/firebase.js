@@ -1,4 +1,5 @@
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
+import 'firebase/database'
  let config = {
     apiKey: "AIzaSyC7Cth1fPdXc5CnGGloOXpGL7dKe3MpFQQ",
     authDomain: "backbase-exam-app.firebaseapp.com",

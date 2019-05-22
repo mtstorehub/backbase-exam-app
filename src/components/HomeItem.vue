@@ -81,13 +81,7 @@
     firebase: {
       items: database.ref('exams')
     },
-
-    props: [],
-    beforeCreate() {
-
-    },
     created() {
-      console.log('created');
       setTimeout(() => {
         this.shuffle(this.items)
       }, 4000);
@@ -100,15 +94,9 @@
       }, 1000);
     },
     beforeMount() {
-      console.log('before mount');
       this.items.map((item, index) => {
         Object.assign(item, { index: index });
       });
-    },
-    mounted() {
-      console.log('mounted');
-    },
-    beforeUpdate() {
     },
     updated() {
       this.pointer = this.page - 1
@@ -149,8 +137,6 @@
         }
       },
     },
-    computed: {
-    }
   }
 </script>
 
