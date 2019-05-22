@@ -133,7 +133,8 @@
         array.sort(() => Math.random() - 0.5)
       },
       nextItem() {
-        this.page++;
+        if(this.items.length > this.page)
+          this.page++;
       },
       routeItem(n) {
         this.page = n + 1
