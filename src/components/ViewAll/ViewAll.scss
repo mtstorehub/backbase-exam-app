@@ -1,26 +1,35 @@
 .view-all {
-    @mixin overflow {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+  @mixin overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .md-card {
+    width: 320px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    overflow: hidden;
+
+    .md-card-content {
+      @include overflow;
+      height: 3em;
     }
+  }
 
-    .md-card {
-        width: 320px;
-        margin: 4px;
-        display: inline-block;
-        vertical-align: top;
-        text-align: left;
-        overflow: hidden;
+  md-highlight-text {
+    @include overflow;
+  }
 
-        .md-card-content {
-            @include overflow;
-            height: 3em;
-        }
-
-    }
-
-    md-highlight-text {
-        @include overflow;
-    }
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 1;
+  }
 }
