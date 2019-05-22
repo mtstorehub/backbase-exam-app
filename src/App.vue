@@ -113,7 +113,7 @@ $primary-color: #d50000;
   padding: 16px;
   height: -webkit-fill-available;
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 router-link{

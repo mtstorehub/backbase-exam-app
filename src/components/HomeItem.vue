@@ -120,7 +120,8 @@ import { database } from '../config/firebase'
 
     methods: {
       nextItem() {
-        this.page ++;
+        if(this.items.length > this.page)
+            this.page ++;
       },
       routeItem(n) {
         this.page = n + 1
