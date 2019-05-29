@@ -6,15 +6,15 @@
 
 ## Screen Shots
 Desktop view
-[Desktop View SS](./screenshots/desktop.PNG)
+[Desktop View SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/desktop.PNG)
 
 Mobile View
-[Mobile View SS](./screenshots/mobile.PNG)
+[Mobile View SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/mobile.PNG)
 
 Question CRUD view
-[Search View SS](./screenshots/admin_1.png)
+[Search View SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_1.png)
 
-[Update View SS](./screenshots/admin_2.png)
+[Update View SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_2.png)
 
 
 
