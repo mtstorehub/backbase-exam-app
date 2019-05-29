@@ -6,18 +6,7 @@
 
 ## Screen Shots
 Desktop view
-[https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/desktop.PNG](./screenshots/desktop.PNG )
-
-Mobile view
-[https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/mobile.PNG](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/mobile.PNG )
-
-Question CRUD view
-[https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_1.png](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_1.png)
-
-___
-[https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_2.png](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_2.png)
-
-
+[Desktop View SS](./screenshots/desktop.PNG)
 
 
 ## Project setup
