@@ -8,6 +8,15 @@
 Desktop view
 [Desktop View SS](./screenshots/desktop.PNG)
 
+Mobile View
+[Mobile View SS](./screenshots/mobile.PNG)
+
+Question CRUD view
+[Search View SS](./screenshots/admin_1.png)
+
+[Update View SS](./screenshots/admin_2.png)
+
+
 
 ## Project setup
 ```
