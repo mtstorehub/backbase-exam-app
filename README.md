@@ -7,14 +7,14 @@
 
 ## Screen Shots
 Desktop view
-[Desktop view SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/desktop.PNG)
+![Desktop view SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/desktop.PNG)
 
 Mobile view
-[Mobile view SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/mobile.PNG)
+![Mobile view SS](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/mobile.PNG)
 
 Question CRUD view
-[Admin View SS1](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_1.png)
-[Admin View SS2](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_2.png)
+![Admin View SS1](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_1.png)
+![Admin View SS2](https://github.com/mtstorehub/backbase-exam-app/blob/master/screenshots/admin_2.png)
 
 
 
