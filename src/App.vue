@@ -30,9 +30,8 @@
         </md-list>
       </md-drawer>
 
-
       <md-content>
-        <router-view/>
+        <router-view />
       </md-content>
 
       <!-- <router-link to="/">Home</router-link> |
@@ -45,8 +44,7 @@
 <script>
 export default {
   name: "App",
-  components: {
-  },
+  components: {},
   data() {
     return {
       showNavigation: false,
@@ -58,7 +56,7 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import '../node_modules/vuetify/dist/vuetify.css';
+@import "../node_modules/vuetify/dist/vuetify.css";
 
 $primary-color: #d50000;
 
@@ -83,12 +81,12 @@ $primary-color: #d50000;
   }
 }
 
-.md-title{
+.md-title {
   font-size: 1.8em;
 }
 
-.md-primary{
-  background-color: $primary-color!important;
+.md-primary {
+  background-color: $primary-color !important;
 }
 
 .page-container {
@@ -97,6 +95,7 @@ $primary-color: #d50000;
 }
 
 .md-drawer {
+  position: fixed !important;
   width: 230px;
   max-width: calc(100vw - 125px);
 }
@@ -105,10 +104,9 @@ $primary-color: #d50000;
   padding: 16px;
   height: -webkit-fill-available;
   position: relative;
-  overflow: scroll;
 }
 
-router-link{
+router-link {
   text-decoration: none;
 }
 </style>
