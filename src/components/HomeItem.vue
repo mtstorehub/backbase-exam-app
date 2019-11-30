@@ -15,8 +15,8 @@
           Wrong
           <v-badge color="purple">
             <template v-slot:badge>
-            <span>{{trackedWrongItems.length}}</span>
-            </template>
+  <span>{{trackedWrongItems.length}}</span>
+</template>
             <v-icon dark>block</v-icon>
           </v-badge>
         </v-btn>
@@ -59,7 +59,8 @@
       v-bind:item="items[pointer]" 
       v-bind:index="page" 
       v-on:next-item="nextItem" 
-      v-on:set-tracked-item="markAsTrackedItem">
+      v-on:set-tracked-item="markAsTrackedItem"
+      :render="itemrender">
     </item>
     
     <div class="footer">
@@ -87,18 +88,20 @@ import { database } from '../config/firebase'
      
     },
     created() {
-      console.log('created');
-      
-    },
-    beforeMount() {
-      console.log('before mount');
-      this.items.map((item, index) => {
-      Object.assign(item, {index: index});
-      });
+      setTimeout(() => {
+        this.shuffle(this.items)
+      }, 4000);
+      setInterval(() => {
+        if (this.progressAmount === 100) {
+          this.itemrender = true
+        }
+        this.progressAmount += 25
+      }, 1000);
     },
     mounted() {
-    console.log('mounted');
-    
+    this.items.map((item, index) => {
+      Object.assign(item, {index: index});
+      });
     },
     beforeUpdate() {
     },
@@ -114,11 +117,16 @@ import { database } from '../config/firebase'
         pointer: 0,
         page: 1,
         showCorrectItemsState: false,
-        showWrongItemsState: false
+        showWrongItemsState: false,
+        progressAmount: 0,
+        itemrender: false
       }
     },
 
     methods: {
+      shuffle(array) {
+        array.sort(() => Math.random() - 0.5)
+      },
       nextItem() {
         if(this.items.length > this.page)
             this.page ++;
