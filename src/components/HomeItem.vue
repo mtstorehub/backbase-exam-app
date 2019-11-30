@@ -56,10 +56,10 @@
     </div>
 
     <item 
-      v-bind:item="items[pointer]" 
-      v-bind:index="page" 
-      v-on:next-item="nextItem" 
-      v-on:set-tracked-item="markAsTrackedItem"
+      :item="items[pointer]" 
+      :index="page" 
+      :next-item="nextItem" 
+      @set-tracked-item="markAsTrackedItem"
       :render="itemrender">
     </item>
     
